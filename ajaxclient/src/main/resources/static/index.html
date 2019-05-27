@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="#" onclick="get1()">get1</a>
+<br>
+
+<a href="#" onclick="postJson()">postJson</a>
+<br>
+
+<a href="#" onclick="getCookie()">getCookie</a>
+<span>ie上测试通过，但是goole上测试失败，错误码400</span>
+<br>
+
+<a href="#" onclick="getHeader()">自定义头部</a>
+<br>
+
+
+
+<a href="#" onclick="getJsonp()">getJsonp</a>
+<span>jsonp解决方案还是需要后台修改代码</span>
+<br>
+
+<h5>
+
+</h5>
+
+<script src="./jquery.js"></script>
+<script>
+    document.cookie="cookie1=xiaoming";
+    function get1() {
+        $.getJSON("http://localhost:8080/test/get1",function (res) {
+            console.log(res);
+            $("h5").html(JSON.stringify(res));
+
+        });
+    }
+    function postJson() {
+        $.ajax({
+            type:"post",
+            url:'http://localhost:8080/test/postJson',
+            contentType:'application/json;chartset=utf-8',
+            data:JSON.stringify({
+                name:"xiaoming"
+            }),
+            success:function (json) {
+                console.log(json);
+                $("h5").html(JSON.stringify(json));
+            }
+        })
+    }
+
+    function getCookie() {
+        $.ajax({
+            type:"get",
+            url:'http://localhost:8080/test/getCookie',
+            crossDomain:true, //设置跨域为true
+            xhrFields:{
+                withCredentials:true
+            },
+            success:function (json) {
+                console.log(json);
+                $("h5").html(JSON.stringify(json));
+            }
+        })
+    }
+    function getHeader() {
+        $.ajax({
+            type:"get",
+            url:'http://localhost:8080/test/getHeader',
+            headers:{
+                "x-header1":"AAA"
+            },
+            beforeSend:function (xhr) {
+                xhr.setRequestHeader("x-header2","BBB")
+            },
+            success:function (json) {
+                console.log(json);
+                $("h5").html(JSON.stringify(json));
+            }
+        })
+    }
+
+    function getJsonp() {
+        $.ajax({
+            url:'http://localhost:8080/test/get1',
+            dataType:'jsonp',
+            success:function (json) {
+                console.log(json);
+                $("h5").html(JSON.stringify(json));
+            }
+        })
+    }
+</script>
+</body>
+</html>
