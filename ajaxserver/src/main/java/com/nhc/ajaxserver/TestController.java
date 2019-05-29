@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/test")
-@CrossOrigin   //spring支持跨域的注解
+//@CrossOrigin   //spring支持跨域的注解
 public class TestController {
 
     @GetMapping("/get1")

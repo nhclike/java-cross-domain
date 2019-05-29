@@ -32,8 +32,10 @@
 <script src="./jquery.js"></script>
 <script>
     document.cookie="cookie1=xiaoming";
+    //var baseUrl="http://localhost:8080";
+    var baseUrl="http://b.com";
     function get1() {
-        $.getJSON("http://localhost:8080/test/get1",function (res) {
+        $.getJSON(baseUrl+"/test/get1",function (res) {
             console.log(res);
             $("h5").html(JSON.stringify(res));
 
@@ -42,7 +44,7 @@
     function postJson() {
         $.ajax({
             type:"post",
-            url:'http://localhost:8080/test/postJson',
+            url:baseUrl+'/test/postJson',
             contentType:'application/json;chartset=utf-8',
             data:JSON.stringify({
                 name:"xiaoming"
@@ -57,7 +59,7 @@
     function getCookie() {
         $.ajax({
             type:"get",
-            url:'http://localhost:8080/test/getCookie',
+            url:baseUrl+'/test/getCookie',
             crossDomain:true, //设置跨域为true
             xhrFields:{
                 withCredentials:true
@@ -71,7 +73,7 @@
     function getHeader() {
         $.ajax({
             type:"get",
-            url:'http://localhost:8080/test/getHeader',
+            url:baseUrl+'/test/getHeader',
             headers:{
                 "x-header1":"AAA"
             },
@@ -87,7 +89,7 @@
 
     function getJsonp() {
         $.ajax({
-            url:'http://localhost:8080/test/get1',
+            url:baseUrl+'/test/get1',
             dataType:'jsonp',
             success:function (json) {
                 console.log(json);

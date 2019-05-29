@@ -19,7 +19,6 @@ public class CrosFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res=(HttpServletResponse)response;
-
         HttpServletRequest req=(HttpServletRequest)request;
 
         String origin =req.getHeader("Origin");
